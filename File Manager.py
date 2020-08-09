@@ -29,14 +29,14 @@ def directory_details():
     time.sleep(1)
     dir = os.listdir()
     cwd = os.getcwd()
-    print(f"\n{Fore.RED}Current Working Directory:-->{Fore.RESET} {Back.BLACK}{Fore.RED}{cwd}{Style.RESET_ALL}\n")
+    print(f"\n{Fore.RED}Current Working Directory:-->{Fore.RESET}{Style.BRIGHT} {Back.BLACK}{Fore.RED}{cwd}{Style.RESET_ALL}\n")
     directories=cwd.replace('\\','/').split('/')
     wd=directories[len(directories)-1]
     dirlist=[]
     filelist=[]
     # print(dir)
     # print()
-    print(f"{Fore.RED}Directory Name ---> {Back.BLACK}{Fore.RED}*** {wd.upper()} ***{Style.RESET_ALL}\n")
+    print(f"{Fore.RED}Directory Name ---> {Back.BLACK}{Style.BRIGHT}{Fore.RED}*** {wd.upper()} ***{Style.RESET_ALL}\n")
     for items in dir:
         if os.path.isfile(items):
             filelist.append(items)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     directory_details()
     a=True
     while a:
-        b = input(f'\n\n{Back.BLACK}{Fore.RED}Enter filename or directory name to open:{Style.RESET_ALL} {Style.BRIGHT}{Fore.GREEN}')
+        b = input(f'\n\n{Back.BLACK}{Style.BRIGHT}{Fore.RED}Enter filename or directory name to open:{Style.RESET_ALL} {Style.BRIGHT}{Fore.GREEN}')
         if b in os.listdir():
             if os.path.isfile(b):
                 clear()
