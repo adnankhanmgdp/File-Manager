@@ -78,6 +78,10 @@ if __name__ == '__main__':
             directory_details()
 
         elif b=='False':
+            if platform == "linux" or platform == "linux2":
+                os.system('clear')
+            elif platform == "win32":
+                os.system('cls')
             a=False
 
         else:
