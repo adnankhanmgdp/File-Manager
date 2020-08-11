@@ -6,7 +6,7 @@ Author- Lucifer
 Project- Open source
 Date- 09/08/2020
 
-
+![Screenshot](Capture.JPG)
 
      Python File Manager(CLI) ~by lucifer
 
