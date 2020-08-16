@@ -21,8 +21,8 @@
 
 ### How to use
 ```
-$ cd File-Manager
-$ python File-Manager.py
+	$ cd File-Manager
+	$ python File-Manager.py
 ```
 
 ![Screenshot 1](/screenshots/Capture.JPG)
