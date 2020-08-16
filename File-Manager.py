@@ -18,16 +18,17 @@ def intro():
                 {Fore.RED}{Style.BRIGHT}Python File Manager(CLI) ~by lucifer
 
                 {Fore.GREEN}*** Instructions ***
-                1. Type cat <file name> to read file contents
-                2. Type cd √[Press Enter] type Directory name or\n\t\t   complete path to go to directory
-                3. Type ls to get directory details
-                4. Type help for help options
-                5. Type rm <directory name> to remove directory
-                6. Type mv to move file/directory to new path
-                7. Type cp to copy file
-                8. Type clear to clear screen
+                1. Type cat <file name> to read file contents.
+                2. Type cd √[Press Enter] type Directory name or\n\t\t   complete path to go to directory.
+                3. Type ls to get directory details.
+                4. Type help for help options.
+                5. Type rm <directory name> to remove directory.
+                6. Type mv to move file/directory to new path.
+                7. Type cp to copy file.
+                8. Type clear to clear screen.
                 9. Type Exit to exit File Manager.
-                10. Type mkdir <directory name> to make new directory.{Style.RESET_ALL}
+                10. Type mkdir <directory name> to make new directory.
+                11. Type pwd or cwd to print working/current directory.{Style.RESET_ALL}
                 
                 """)
 def check(file):
