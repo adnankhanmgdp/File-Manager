@@ -9,10 +9,12 @@
 ### Installation of python
  -->For Linux
 ```
+	$ sudo apt-get update && apt-get upgrade
 	$ sudo apt-get install python3
 ```
  -->For Termux
 ```
+	$ pkg update && pkg upgrade
 	$ pkg install python
 ```
  -->For Windows
