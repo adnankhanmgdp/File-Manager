@@ -18,39 +18,39 @@ def intro():
                 {Fore.RED}{Style.BRIGHT}Python File Manager(CLI) ~by lucifer
 
                 {Fore.GREEN}*** Instructions ***
-                1. Type full File name to read file contents
-                2. Type full Directory name to go to directory
-                3. Type .. to go to Parent directory
-                4. Type ls to get directory details
-                5. Type help for help options
-                6. Type rm <directory name> to remove directory
-                7. Type mv to move file/directory to new path
-                8. Type cp to copy file
-                9. Type clear to clear screen
-                10. Type Exit to exit File Manager.
+                1. Type cat <file name> to read file contents
+                2. Type cd √[Press Enter] type Directory name or\n\t\t   complete path to go to directory
+                3. Type ls to get directory details
+                4. Type help for help options
+                5. Type rm <directory name> to remove directory
+                6. Type mv to move file/directory to new path
+                7. Type cp to copy file
+                8. Type clear to clear screen
+                9. Type Exit to exit File Manager.
+                10. Type mkdir <directory name> to make new directory.{Style.RESET_ALL}
                 
-
-                {Fore.CYAN}Fetching Files and Directories...{Style.RESET_ALL}
                 """)
 def check(file):
-    dirlist = []
-    filelist = []
+    dirlist = []   # List of all directories in Current Working Directory.
+    filelist = []  # List of all files in Current Working Directory.
     for items in os.listdir():
         if os.path.isfile(items):
-            filelist.append(items)
+            filelist.append(items)  # List all files in filelist
         elif os.path.isdir(items):
-            dirlist.append(items)
+            dirlist.append(items)   # List all files in dirlist
     if file in dirlist:
-        return True
-    else:
-        return False
+        del dirlist
+        return True  # Return true if Function Argument is a Directory in Current Working Directory.
+    elif file in filelist:
+        del filelist
+        return False   # Return true if Function Argument is a File in Current Working Directory.
 def directory_details():
 
-    dir = os.listdir()
-    cwd = os.getcwd()
+    dir = os.listdir()   # List of Directories and files
+    cwd = os.getcwd()  # Current Working Directory.
     print(f"\n{Fore.RED}Current Working Directory:-->{Fore.RESET} {Back.CYAN}{Fore.RED}{cwd}{Style.RESET_ALL}\n")
-    directories=cwd.replace('\\','/').split('/')
-    wd=directories[len(directories)-1]
+    directories=cwd.replace('\\','/').split('/')    # Current Working Directory.
+    wd=directories[len(directories)-1]  # Working Directory.
     # global dirlist
     # global filelist
     dirlist=[]
@@ -75,55 +75,74 @@ def directory_details():
             print(Fore.BLUE,items,Fore.RESET)
     else:
         print(f"\n{Style.BRIGHT}{Fore.YELLOW}*** No Directory found ***{Style.RESET_ALL}")
+    del dir
+    del cwd
+    del wd
+    del filelist
+    del dirlist
 
-if __name__ == '__main__':
+def main():
     clear()
     # intro()
+    print(f"\t\t{Fore.CYAN}Fetching Files and Directories...{Style.RESET_ALL}\n")
     time.sleep(1)
-    a=True
+    a = True
     while a:
 
         b = input(f'\n{Back.CYAN}{Fore.RED}Explorer:~[{os.getcwd()}]{Style.RESET_ALL}>>> {Fore.GREEN}')
-        if b in os.listdir():
+        if b.startswith('cat '):
+            b = b.replace('cat ', '')
+            # if b in os.listdir():
             if os.path.isfile(b):
                 # clear()
                 # intro()
                 try:
-                    f=open(b,"r")
-                    print(f"\n{Style.BRIGHT}{Fore.YELLOW}*** Starting of {b} ***{Fore.RESET}\n\n{f.read()}\n\n{Fore.YELLOW}*** Ending of {b} ***{Fore.RESET}\n\n")
+                    f = open(b, "r")
+                    print(
+                        f"\n{Style.BRIGHT}{Fore.YELLOW}*** Starting of {b} ***{Fore.RESET}\n\n{f.read()}\n\n{Fore.YELLOW}*** Ending of {b} ***{Fore.RESET}\n\n")
                 except:
-                    print(f"\n\n{Style.BRIGHT}{Fore.RED}*** {b} could not be read!\nMay it {b} is not a text file{Fore.RESET}\n\n")
+                    print(
+                        f"\n\n{Style.BRIGHT}{Fore.RED}*** {b} could not be read!\nMay \'{b}\' is not a text file{Style.RESET_ALL}\n\n")
                 time.sleep(5)
-            elif os.path.isdir(b):
-                cwd=os.getcwd().replace('\\','/')
-                wd=cwd+'/'+b
-                os.chdir(wd)
                 # clear()
                 # intro()
+        elif b == "cd":
+            path = input('Enter valid path: ').replace('\\', '/')
+            if os.path.isdir(path) and check(path):
+                cwd = os.getcwd().replace('\\', '/')
+                wd = cwd + '/' + path
+                os.chdir(wd)
+            elif path == '..':
+                os.chdir('..')
+            else:
+                try:
+                    os.chdir(path)
+                except:
+                    print(f"\'{path}\': is invalid")
         elif b == "":
+            print("\033[A\033[A")
             continue
-        elif b == '..':
-            os.chdir('..')
             # clear()
-        elif b=='ls':
+        elif b == 'ls':
             directory_details()
-        elif b=='pwd':
+        elif b == 'pwd' or b == 'cwd':
             cwd = os.getcwd()
-            print(f"\n{Fore.RED}Current Working Directory:-->{Fore.RESET} {Back.CYAN}{Fore.RED}{cwd}{Style.RESET_ALL}\n")
+            print(
+                f"\n{Fore.RED}Current Working Directory:-->{Fore.RESET} {Back.CYAN}{Fore.RED}{cwd}{Style.RESET_ALL}\n")
 
-        elif b=='Exit' or b=='exit':
+        elif b == 'Exit' or b == 'exit' or b == 'EXIT':
             clear()
             # intro()
-            print(Style.BRIGHT,Fore.RED,'    ~lucifer',Style.RESET_ALL)
+            print(Style.BRIGHT, Fore.RED, '    ~lucifer', Style.RESET_ALL)
             a = False
         elif b == 'cp':
-            file = input('Enter file/directory to be copied: ')
-            if file in os.listdir() and check(file)== False:
+            file = input('Enter file name to be copied: ')
+            if file in os.listdir() and check(file) == False:
                 if len(file.split(' ')) > 1:
                     file = '"' + file + '"'
                 adr = input('Enter destination path: ')
                 ad = adr
-                adr = adr.replace('\\','/')
+                adr = adr.replace('\\', '/')
                 try:
                     if platform == "linux" or platform == "linux2":
                         # os.system('clear')
@@ -137,8 +156,7 @@ if __name__ == '__main__':
 
                 except:
                     print(f"wrong path --> {adr}")
-                    cwd = os.getcwd().replace('\\', '/')
-                    os.chdir(cwd)
+
             else:
                 print(f'\n\n{Style.BRIGHT}{Fore.RED}"{file}": *** No such file to copy ***{Style.RESET_ALL}\n\n')
 
@@ -153,39 +171,51 @@ if __name__ == '__main__':
                 try:
                     if platform == "linux" or platform == "linux2":
                         # os.system('clear')
-                        cp = 'mv ' + file + ' ' + ad
-                        os.system(cp)
+                        mv = 'mv ' + file + ' ' + ad
+                        print(mv)
+                        os.system(mv)
                     elif platform == "win32":
                         # os.system('cls')
-                        cp = 'move ' + file + ' ' + ad
-                        print(cp)
-                        os.system(cp)
+                        mv = 'move ' + file + ' ' + ad
+                        print(mv)
+                        os.system(mv)
                 except:
                     print(f"wrong path --> {adr}")
-                    cwd = os.getcwd().replace('\\', '/')
-                    os.chdir(cwd)
             else:
                 print(f'\n\n{Style.BRIGHT}{Fore.RED}"{file}": *** No such file or directory ***{Style.RESET_ALL}\n\n')
 
+        elif b.startswith('mkdir '):
+            b = b.replace('mkdir ', '')
+            print('\nThis feature (making new Directory) is not yet added\n')
         elif b.startswith('rm '):
-            s=b.split(' ')
-            if len(s)>2:
-                for i in range(2,len(s)):
-                    s[1]=s[1]+' '+s[i]
-                if s[1] in os.listdir() and check(s[1]):
+            b = b.replace('rm ', '')
+
+            if b in os.listdir() and check(b):
+                if platform == "win32":
+                    os.rmdir(b)
+                    print(f"dir(\"{b}\") removed successfully")
+                elif platform == "linux" or platform == "linux2":
                     try:
-                        os.rmdir(s[1])
-                        print(f"dir(\"{s[1]}\") removed successfully")
+                        os.rmdir(b)
+                        print(f"dir(\"{b}\") removed successfully")
                     except:
-                        print(f'cannot remove!\n{s[1]}: not a directory')
-            elif s[1] in os.listdir():
-                try:
-                    os.rmdir(s[1])
-                    print(f"dir(\"{s[1]}\") removed successfully")
-                except:
-                    print(f'cannot remove!\n{s[1]}: not a directory')
+                        if ' ' in b:
+                            b = '"' + b + '"'
+                        os.system(f'rm -rf {b}')
+                        print(f"dir(\"{b}\") removed successfully")
+
+            elif b in os.listdir() and check(b) == False:
+                if ' ' in b:
+                    b = '"' + b + '"'
+                if platform == "win32":
+                    os.system(f'del /f {b}')
+                    print(f"file(\"{b}\") removed successfully")
+
+                elif platform == "linux" or platform == "linux2":
+                    os.system(f'rm {b}')
+                    print(f"file(\"{b}\") removed successfully")
             else:
-                print(f'\n\n{Style.BRIGHT}{Fore.RED}"{s[1]}": *** No such directory ***{Style.RESET_ALL}\n\n')
+                print(f'\n\n{Style.BRIGHT}{Fore.RED}"{b}": *** No such file or directory ***{Style.RESET_ALL}\n\n')
 
         elif b == 'clear':
             clear()
@@ -195,6 +225,9 @@ if __name__ == '__main__':
             intro()
 
         else:
-            print(f'\n\n{Style.BRIGHT}{Fore.RED}"{b}": *** No such file or directory ***\n\"{b}\" *is not recognized as internal command*\n!*GO UP and Read Instructions Carefully*!{Style.RESET_ALL}\n\n')
+            print(
+                f'\n\n{Style.BRIGHT}{Fore.RED}"{b}": *** is not recognized as an internal command ***\n*** Type \"help\" to read instructions ***{Style.RESET_ALL}\n\n')
 
+if __name__ == '__main__':
+    main()
 
