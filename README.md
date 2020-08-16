@@ -27,7 +27,7 @@ $ python File-Manager.py
 
 ![Screenshot 1](/screenshots/Capture.JPG)
 
-     ### Python File Manager(CLI) ~by lucifer
+###  Python File Manager(CLI) ~by lucifer
 
      *** Instructions ***
      1. Type full File name to read file contents
