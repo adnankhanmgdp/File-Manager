@@ -1,14 +1,33 @@
 # File-Manager
 
 
-Python File Manager
-Author- Lucifer
-Project- Open source
-Date- 09/08/2020
+#### Python File Manager
+#### Author- Lucifer
+#### Project- Open source
+#### Date- 09/08/2020
+
+### Installation of python
+ -->For Linux
+```
+	$ sudo apt-get install python3
+```
+ -->For Termux
+```
+	$ pkg install python
+```
+ -->For Windows
+	Download Python.exe
+	👉🏻 https://www.python.org/ftp/python/3.8.5/python-3.8.5.exe
+
+### How to use
+```
+$ cd File-Manager
+$ python File-Manager.py
+```
 
 ![Screenshot 1](/screenshots/Capture.JPG)
 
-     Python File Manager(CLI) ~by lucifer
+     ####Python File Manager(CLI) ~by lucifer
 
      *** Instructions ***
      1. Type full File name to read file contents
